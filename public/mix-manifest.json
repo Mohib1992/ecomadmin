@@ -2,5 +2,6 @@
     "/js/app.js": "/js/app.js",
     "/js/appshell.js": "/js/appshell.js",
     "/css/app.css": "/css/app.css",
-    "/css/appshell.css": "/css/appshell.css"
+    "/css/appshell.css": "/css/appshell.css",
+    "/css/admin/app.css": "/css/admin/app.css"
 }

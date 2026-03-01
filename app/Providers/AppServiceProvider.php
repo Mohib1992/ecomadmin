@@ -2,10 +2,10 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
-use Schema;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -21,6 +21,7 @@ class AppServiceProvider extends ServiceProvider
             URL::forceScheme('https');
         }
 
+        $this->app->concord->registerModel(\Vanilo\Product\Contracts\Product::class, \App\Product::class); 
         $this->app->concord->registerModel(\Konekt\User\Contracts\User::class, \App\User::class);
     }
 

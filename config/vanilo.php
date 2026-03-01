@@ -5,5 +5,6 @@ return [
         'number' => [
             'generator' => 'nano_id',
         ]
-    ]
+    ],
+    'multichannel' => false,
 ];

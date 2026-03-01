@@ -3,9 +3,19 @@
 return [
     'modules' => [
         Konekt\AppShell\Providers\ModuleServiceProvider::class => [
+            'default_theme' => [
+                'custom_assets' => [
+                    'enabled' => true,
+                    'css_link' => ['css/appshell.css', '/css/admin/app.css'],
+                    'js_link'  => 'js/appshell.js',
+                    'helper'   => 'asset',
+                ],
+            ],
             'ui' => [
                 'name' => 'Vanilo',
-                'url' => '/admin/product'
+                'url' => '/admin',
+                'theme' => 'appshell',
+                'use_mix' => true
             ]
         ],
         Vanilo\Foundation\Providers\ModuleServiceProvider::class => [
@@ -43,7 +53,13 @@ return [
                 ]
             ],
         ],
-        Vanilo\Admin\Providers\ModuleServiceProvider::class,
+        Vanilo\Admin\Providers\ModuleServiceProvider::class => [
+            'route' => [
+                'prefix' => 'admin',
+                'as' => 'vanilo.admin.',
+                'middleware' => ['auth']
+            ],
+        ],
         Vanilo\Adyen\Providers\ModuleServiceProvider::class,
         Vanilo\Braintree\Providers\ModuleServiceProvider::class,
         Vanilo\Mollie\Providers\ModuleServiceProvider::class,

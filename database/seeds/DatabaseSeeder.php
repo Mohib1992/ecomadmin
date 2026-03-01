@@ -12,5 +12,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call(\Konekt\Address\Seeds\Countries::class);
+        $this->call(\Database\Seeders\Product::class);
+        
     }
 }

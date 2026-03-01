@@ -1,5 +1,15 @@
 <?php
 
+use App\Product;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+use Konekt\Customer\Models\Customer;
+use Mollie\Api\Types\OrderStatus;
+use Vanilo\Channel\Models\Channel;
+use Vanilo\Foundation\Models\OrderItem;
+use Vanilo\Order\Models\Order;
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,6 +23,23 @@
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::get('/admin', function () {
+
+    $totalCustomer = Customer::count();
+    $totalProduct = Product::count();
+    $totalOrder = Order::count();
+    $totalRevenue = OrderItem::whereHas('order', function ($query) {
+        $query->where('status', OrderStatus::STATUS_COMPLETED);
+    })
+    ->sum('price');
+    return view('admin', [
+        'totalCustomer' => $totalCustomer,
+        'totalProduct' => $totalProduct,
+        'totalOrder' => $totalOrder,
+        'totalRevenue' => $totalRevenue,
+    ]);
 });
 
 Auth::routes();
